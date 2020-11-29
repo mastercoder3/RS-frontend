@@ -1,0 +1,60 @@
+<app-navigation></app-navigation>
+
+<div class="main container">
+    <div class="header">
+      <div class="grid-1">
+        <div class="title">
+          <h1>Reports</h1>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <!-- search after transfer id -->
+        <label for="search">
+          <span class="input-label">Search Location</span>
+          <div class="input-wrapper text-wrapper">
+            <input name="search" type="text" [(ngModel)]="query">
+          </div>
+        </label>
+
+        <button class="button button-primary" (click)="search()" >Search</button>
+      </div>
+
+      <br>
+
+    </div>
+  
+    <div class="divider"></div>
+  
+    <div class="content" *ngIf="locations.length > 0">
+      <div class="table table-6">
+        <div class="table-header">
+          <p>ID</p>
+          <p>Name</p>
+          <p>ADDRESS</p>
+          <p>CONTACT</p>
+          <p>TYPE</p>
+          <p>ACTIONS</p>
+        </div>
+        <div class="table-content">
+            <div class="entry" *ngFor="let item of locations | paginate: { itemsPerPage: 10, currentPage: pageNumber }; let i = index">
+                <p><small>{{i+1}}</small></p>
+                <p>{{item?.name}}</p>
+                <p>{{item?.address}}</p>
+                <p>{{item?.phone}}</p>
+                <p>{{item?.type}}</p>
+                <p>
+                  <a (click)="addToFavorites(item)">Add to Fav</a>
+                </p>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="pageNumber = $event" previousLabel="Previous"
+        nextLabel="Next"
+        responsive="true"
+        autoHide="true"
+        directionLinks="false"
+        ></pagination-controls> 
+      </div>
+    </div>
+  </div>
+  

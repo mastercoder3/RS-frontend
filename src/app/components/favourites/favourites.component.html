@@ -1,0 +1,46 @@
+<app-navigation></app-navigation>
+
+<div class="main container">
+    <div class="header">
+      <div class="grid-1">
+        <div class="title">
+          <h1>Favorites Locations</h1>
+        </div>
+      </div>
+
+    </div>
+  
+    <div class="divider"></div>
+  
+    <div class="content">
+      <div class="table table-6">
+        <div class="table-header">
+          <p>ID</p>
+          <p>Name</p>
+          <p>ADDRESS</p>
+          <p>CONTACT</p>
+          <p>TYPE</p>
+          <p>ACTIONS</p>
+        </div>
+        <div class="table-content">
+            <div class="entry" *ngFor="let item of locations | paginate: { itemsPerPage: 10, currentPage: pageNumber }; let i = index">
+                <p><small>{{i+1}}</small></p>
+                <p>{{item?.name}}</p>
+                <p>{{item?.address}}</p>
+                <p>{{item?.phone}}</p>
+                <p>{{item?.type}}</p>
+                <p>
+                    <a (click)="removeFavorite(item)">Remove Fav</a>
+                </p>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="pageNumber = $event" previousLabel="Previous"
+        nextLabel="Next"
+        responsive="true"
+        autoHide="true"
+        directionLinks="false"
+        ></pagination-controls> 
+      </div>
+    </div>
+  </div>
+  
